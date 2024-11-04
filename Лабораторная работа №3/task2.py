@@ -1,12 +1,10 @@
 def find_common_participants(str_1, str_2, spliter=','):
-    first_group = str_1.split(spliter)
+    first_group = set(str_1.split(spliter))
     second_group = str_2.split(spliter)
 
-    common_participants = []
+    common_participants = list(first_group.intersection(second_group))
+    common_participants.sort()
 
-    for first_participant in first_group:
-        if first_participant in second_group:
-            common_participants.append(first_participant)
     return (common_participants)
 
 
