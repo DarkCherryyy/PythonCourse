@@ -1,6 +1,6 @@
 def first_find_item(list, item):
-    for index in range(len(list)):
-        if list[index] == item:
+    for index, item_in_list in enumerate(list):
+        if item_in_list == item:
             return index
     return None
 
