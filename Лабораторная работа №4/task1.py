@@ -7,8 +7,7 @@ def task() -> float:
     with open('input.json', 'r') as file:
         data = json.load(file)
 
-    for i in range(len(data)):
-        sum_ += data[i].get("score") * data[i].get("weight")
+    sum_ = sum([data[i].get("score") * data[i].get("weight") for i in range(len(data))])
 
     return round(sum_, 3)
 
