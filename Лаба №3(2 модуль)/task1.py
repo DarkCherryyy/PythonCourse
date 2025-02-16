@@ -2,7 +2,11 @@ class Book:
     """ Базовый класс книги. """
 
     def __init__(self, name: str, author: str):
+        if not isinstance(name, str):
+            raise TypeError('Название книги должно быть типа str')
         self._name = name
+        if not isinstance(author, str):
+            raise TypeError('Автор книги должен быть типа str')
         self._author = author
 
     def __str__(self):
@@ -15,11 +19,18 @@ class Book:
 class PaperBook(Book):
     def __init__(self, name: str, author: str, pages: int):
         super().__init__(name, author)
-        if not isinstance(pages, int):
-            raise TypeError('Количество страниц в книге должен быть типа int')
-        if pages < 0:
+
+    @property
+    def pages(self):
+        return self._pages
+
+    @pages.setter
+    def pages(self, value):
+        if not isinstance(value, int):
+            raise TypeError('Количество страниц в книге должно быть типа int')
+        if value < 0:
             raise ValueError('Количество страниц не должно быть отрицательным')
-        self.pages = pages
+        self._pages = value
 
     def __repr__(self):
         return f"{self.__class__.__name__}(name={self._name!r}, author={self._author!r}, pages={self.pages!r})"
@@ -28,11 +39,19 @@ class PaperBook(Book):
 class AudioBook(Book):
     def __init__(self, name: str, author: str, duration: float):
         super().__init__(name, author)
-        if not isinstance(duration, float):
+
+    @property
+    def duration(self):
+        return self._duration
+
+    @duration.setter
+    def duration(self, value):
+        if not isinstance(value, float):
             raise TypeError('Продолжительность книги должна быть типа float')
-        if duration < 0:
+        if value < 0:
             raise ValueError('Продолжительность книги должна быть отрицательной')
-        self.duration = duration
+        self._duration = value
 
     def __repr__(self):
         return f"{self.__class__.__name__}(name={self._name!r}, author={self._author!r}, duration={self.duration!r})"
+
